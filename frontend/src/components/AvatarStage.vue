@@ -25,19 +25,19 @@
         <div class="modal-body">
           <div class="config-section">
             <h4>Avatar Position</h4>
-            <label>X: <input type="range" min="-10" max="10" step="0.1" v-model.number="currentConfig.avatarX" @input="applyConfigValues"></label>
-            <label>Y: <input type="range" min="-10" max="10" step="0.1" v-model.number="currentConfig.avatarY" @input="applyConfigValues"></label>
-            <label>Z: <input type="range" min="-10" max="10" step="0.1" v-model.number="currentConfig.avatarZ" @input="applyConfigValues"></label>
+            <label>X: <input type="range" min="-50" max="50" step="0.1" v-model.number="currentConfig.avatarX" @input="applyConfigValues"></label>
+            <label>Y: <input type="range" min="-50" max="50" step="0.1" v-model.number="currentConfig.avatarY" @input="applyConfigValues"></label>
+            <label>Z: <input type="range" min="-50" max="50" step="0.1" v-model.number="currentConfig.avatarZ" @input="applyConfigValues"></label>
             <label>Rot: <input type="range" min="-3.14" max="3.14" step="0.01" v-model.number="currentConfig.avatarRotY" @input="applyConfigValues"></label>
           </div>
           <div class="config-section">
             <h4>Camera (View & Target)</h4>
-            <label>Cam X: <input type="range" min="-20" max="20" step="0.1" v-model.number="currentConfig.cameraX" @input="applyConfigValues"></label>
-            <label>Cam Y: <input type="range" min="-10" max="20" step="0.1" v-model.number="currentConfig.cameraY" @input="applyConfigValues"></label>
-            <label>Cam Z: <input type="range" min="-20" max="30" step="0.1" v-model.number="currentConfig.cameraZ" @input="applyConfigValues"></label>
-            <label>Tar X: <input type="range" min="-10" max="10" step="0.1" v-model.number="currentConfig.targetX" @input="applyConfigValues"></label>
-            <label>Tar Y: <input type="range" min="-10" max="10" step="0.1" v-model.number="currentConfig.targetY" @input="applyConfigValues"></label>
-            <label>Tar Z: <input type="range" min="-10" max="10" step="0.1" v-model.number="currentConfig.targetZ" @input="applyConfigValues"></label>
+            <label>Cam X: <input type="range" min="-50" max="50" step="0.1" v-model.number="currentConfig.cameraX" @input="applyConfigValues"></label>
+            <label>Cam Y: <input type="range" min="-50" max="50" step="0.1" v-model.number="currentConfig.cameraY" @input="applyConfigValues"></label>
+            <label>Cam Z: <input type="range" min="-50" max="100" step="0.1" v-model.number="currentConfig.cameraZ" @input="applyConfigValues"></label>
+            <label>Tar X: <input type="range" min="-50" max="50" step="0.1" v-model.number="currentConfig.targetX" @input="applyConfigValues"></label>
+            <label>Tar Y: <input type="range" min="-50" max="50" step="0.1" v-model.number="currentConfig.targetY" @input="applyConfigValues"></label>
+            <label>Tar Z: <input type="range" min="-50" max="50" step="0.1" v-model.number="currentConfig.targetZ" @input="applyConfigValues"></label>
           </div>
           <div class="config-section save-section">
             <input type="text" v-model="newConfigName" placeholder="Tên layout..." />
@@ -282,9 +282,13 @@ const initTalkingHead = async () => {
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
     controls.target.set(0, 1.0, 0); // Tập trung nhìn vào ngực/eo nhân vật
-    controls.minDistance = 1; // Zoom in tối đa
-    controls.maxDistance = 15; // Zoom out tối đa (Cần xa vì FOV của TalkingHead chỉ có 10 độ)
+    controls.minDistance = 0.5; // Zoom in tối đa
+    controls.maxDistance = 100; // Tăng giới hạn zoom out để nhìn thấy toàn cảnh
     controls.maxPolarAngle = Math.PI / 2 + 0.1; // Không cho lật camera xuống dưới mặt đất quá sâu
+    
+    // Nới rộng góc nhìn FOV của camera (TalkingHead mặc định là 10, hơi hẹp)
+    headInstance.camera.fov = 30;
+    headInstance.camera.updateProjectionMatrix();
 
     // Vòng lặp liên tục để update độ mượt (damping) của OrbitControls
     const animate = () => {
