@@ -1,0 +1,11 @@
+node_modules/
+.env
+dist/
+configs.sqlite
+configs.sqlite-journal
+configs.sqlite-wal
+configs.sqlite-shm
+vieneu/
+scratch.json
+.agents/
+.DS_Store
