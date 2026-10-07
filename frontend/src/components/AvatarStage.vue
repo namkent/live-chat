@@ -25,19 +25,19 @@
         <div class="modal-body">
           <div class="config-section">
             <h4>Avatar Position</h4>
-            <label>X: <input type="range" min="-50" max="50" step="0.1" v-model.number="currentConfig.avatarX" @input="applyConfigValues"></label>
-            <label>Y: <input type="range" min="-50" max="50" step="0.1" v-model.number="currentConfig.avatarY" @input="applyConfigValues"></label>
-            <label>Z: <input type="range" min="-50" max="50" step="0.1" v-model.number="currentConfig.avatarZ" @input="applyConfigValues"></label>
-            <label>Rot: <input type="range" min="-3.14" max="3.14" step="0.01" v-model.number="currentConfig.avatarRotY" @input="applyConfigValues"></label>
+            <label>X: <input type="range" min="-50" max="50" step="0.1" v-model.number="currentConfig.avatarX" @input="applyConfigValues"><input type="number" step="0.1" v-model.number="currentConfig.avatarX" @input="applyConfigValues"></label>
+            <label>Y: <input type="range" min="-50" max="50" step="0.1" v-model.number="currentConfig.avatarY" @input="applyConfigValues"><input type="number" step="0.1" v-model.number="currentConfig.avatarY" @input="applyConfigValues"></label>
+            <label>Z: <input type="range" min="-50" max="50" step="0.1" v-model.number="currentConfig.avatarZ" @input="applyConfigValues"><input type="number" step="0.1" v-model.number="currentConfig.avatarZ" @input="applyConfigValues"></label>
+            <label>Rot: <input type="range" min="-3.14" max="3.14" step="0.01" v-model.number="currentConfig.avatarRotY" @input="applyConfigValues"><input type="number" step="0.01" v-model.number="currentConfig.avatarRotY" @input="applyConfigValues"></label>
           </div>
           <div class="config-section">
             <h4>Camera (View & Target)</h4>
-            <label>Cam X: <input type="range" min="-50" max="50" step="0.1" v-model.number="currentConfig.cameraX" @input="applyConfigValues"></label>
-            <label>Cam Y: <input type="range" min="-50" max="50" step="0.1" v-model.number="currentConfig.cameraY" @input="applyConfigValues"></label>
-            <label>Cam Z: <input type="range" min="-50" max="100" step="0.1" v-model.number="currentConfig.cameraZ" @input="applyConfigValues"></label>
-            <label>Tar X: <input type="range" min="-50" max="50" step="0.1" v-model.number="currentConfig.targetX" @input="applyConfigValues"></label>
-            <label>Tar Y: <input type="range" min="-50" max="50" step="0.1" v-model.number="currentConfig.targetY" @input="applyConfigValues"></label>
-            <label>Tar Z: <input type="range" min="-50" max="50" step="0.1" v-model.number="currentConfig.targetZ" @input="applyConfigValues"></label>
+            <label>Cam X: <input type="range" min="-50" max="50" step="0.1" v-model.number="currentConfig.cameraX" @input="applyConfigValues"><input type="number" step="0.1" v-model.number="currentConfig.cameraX" @input="applyConfigValues"></label>
+            <label>Cam Y: <input type="range" min="-50" max="50" step="0.1" v-model.number="currentConfig.cameraY" @input="applyConfigValues"><input type="number" step="0.1" v-model.number="currentConfig.cameraY" @input="applyConfigValues"></label>
+            <label>Cam Z: <input type="range" min="-50" max="100" step="0.1" v-model.number="currentConfig.cameraZ" @input="applyConfigValues"><input type="number" step="0.1" v-model.number="currentConfig.cameraZ" @input="applyConfigValues"></label>
+            <label>Tar X: <input type="range" min="-50" max="50" step="0.1" v-model.number="currentConfig.targetX" @input="applyConfigValues"><input type="number" step="0.1" v-model.number="currentConfig.targetX" @input="applyConfigValues"></label>
+            <label>Tar Y: <input type="range" min="-50" max="50" step="0.1" v-model.number="currentConfig.targetY" @input="applyConfigValues"><input type="number" step="0.1" v-model.number="currentConfig.targetY" @input="applyConfigValues"></label>
+            <label>Tar Z: <input type="range" min="-50" max="50" step="0.1" v-model.number="currentConfig.targetZ" @input="applyConfigValues"><input type="number" step="0.1" v-model.number="currentConfig.targetZ" @input="applyConfigValues"></label>
           </div>
           <div class="config-section save-section">
             <input type="text" v-model="newConfigName" placeholder="Tên layout..." />
@@ -702,6 +702,7 @@ button:disabled {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 8px;
   margin-bottom: 8px;
   font-size: 0.8rem;
   color: #ccc;
@@ -710,10 +711,25 @@ button:disabled {
 .config-section label:last-child { margin-bottom: 0; }
 
 .config-section input[type="range"] {
-  width: 65%;
+  flex: 1;
   height: 4px;
   accent-color: var(--color-primary);
   cursor: pointer;
+}
+
+.config-section input[type="number"] {
+  width: 50px;
+  padding: 4px;
+  font-size: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  border-radius: 4px;
+  text-align: center;
+  outline: none;
+}
+.config-section input[type="number"]:focus {
+  border-color: var(--color-primary);
 }
 
 .save-section {
