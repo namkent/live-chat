@@ -187,8 +187,8 @@ const loadConfig = async (cfg) => {
     targetX: cfg.targetX, targetY: cfg.targetY, targetZ: cfg.targetZ
   };
   
-  await switchBackground(currentBg.value);
   await loadAvatar(currentAvatar.value, true);
+  await switchBackground(currentBg.value);
   showConfigModal.value = false;
 };
 
@@ -400,6 +400,9 @@ const loadAvatar = async (avatarName, applySavedConfig = false) => {
 
 const switchAvatar = async () => {
   await loadAvatar(currentAvatar.value);
+  if (currentBg.value !== 'none') {
+    await switchBackground(currentBg.value);
+  }
 };
 
 const switchBackground = async (bgId) => {
@@ -718,7 +721,7 @@ button:disabled {
 }
 
 .config-section input[type="number"] {
-  width: 50px;
+  width: 65px;
   padding: 4px;
   font-size: 0.75rem;
   border: 1px solid rgba(255, 255, 255, 0.15);
